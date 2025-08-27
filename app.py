@@ -1,12 +1,11 @@
 from openai import OpenAI
 from dotenv import load_dotenv 
-import os
 import gradio as gr
 
 load_dotenv()  # ← This must run BEFORE OpenAI() is called
 client = OpenAI()
 
-def generate_product_information(user_input):
+def generate_category_overview(user_input):
     
     response = client.responses.create(
         model="gpt-4o",
@@ -14,12 +13,49 @@ def generate_product_information(user_input):
         input=f"""
     Based on this idea: {user_input}
 
-    Create the following:
-    1. Product description
-    2. Category overview
-    3. Competitor landscape
-    4. Target persona overview
-    5. Three unique differentiators
+    Outline the market you compete in and highlight any differentiators. For example, unlike market X, our market is inherently anxious and cash-strapped.
+    """
+    )
+
+    return response.output_text
+
+def generate_competitor_landscape(user_input):
+
+    response = client.responses.create(
+        model="gpt-4o",
+        instructions="You are a seasoned product marketing expert helping someone write a positioning strategy.",
+        input=f"""
+    Based on this idea: {user_input}
+
+    If customers aren't buying from you, who are they going to? List the top contenders here along with their weaknesses in comparison to you.
+    """
+    )
+
+    return response.output_text
+
+def generate_target_persona(user_input):
+
+    response = client.responses.create(
+        model="gpt-4o",
+        instructions="You are a seasoned product marketing expert helping someone write a positioning strategy.",
+        input=f"""
+    Based on this idea: {user_input}, generate a target persona. 
+    
+    A good persona includes a fictional name and photo, demographic details (age, location, job), psychographic information (goals, motivations, frustrations, interests), and behavioral patterns such as buying habits and preferred content or communication channels. It often features a narrative or quote from a real user to make the persona feel authentic and provides space for information about their work environment and challenges.
+    """
+    )
+
+    return response.output_text
+
+def generate_unique_differentiators(user_input):
+
+    response = client.responses.create(
+        model="gpt-4o",
+        instructions="You are a seasoned product marketing expert helping someone write a positioning strategy.",
+        input=f"""
+    Based on this idea: {user_input}, generate three unique differentiators. 
+
+    What about your product makes you stand out from the competition? The emphasis here is on the unique, if your competitor offers the exact same thing, it doesn't belong here. Include the challenge (what problem(s) are your customers facing because of a lack of this feature?) and value (how does your unique attribute solve that challenge? Draw on emotion, utopian visions, and real-life quotes where possible.) in each differentiator. 
     """
     )
 
@@ -40,7 +76,7 @@ def generate_positioning_statement(product_information):
 
     return response.output_text
 
-def display_product_information(user_input):
+def display_insights(user_input):
     product_information = generate_product_information(user_input)
     return product_information
 
