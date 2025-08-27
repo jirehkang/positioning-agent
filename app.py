@@ -49,10 +49,10 @@ def display_positioning_statement(product_information):
 
 
 with gr.Blocks() as demo:
-    gr.Markdown("# 🧠 Positioning Agent")
+    gr.Markdown("# Positioning Statement Agent")
 
     with gr.Row():
-        user_input = gr.Textbox(label="Describe your product/idea", placeholder="It's an app that helps people...")
+        user_input = gr.Textbox(label="Describe your product or feature", info="Include the name, key features, and problems you're solving. Aim to keep it within 1-2 sentences.", placeholder="Slack is where teams talk, share files, and connect their tools. It solves the mess of scattered communication with one streamlined workspace.")
         insights_output = gr.TextArea(label="Generated Marketing Content", lines=15)
 
     generate_button = gr.Button("Generate Content")
