@@ -1,5 +1,6 @@
 import streamlit as st
 from agent import PositioningAgent
+from components import generate_clear_buttons
 
 if 'agent' not in st.session_state:
     st.session_state.agent = PositioningAgent()
@@ -40,6 +41,7 @@ with right_col:
     
     # product description
     st.subheader("Step 1: Enter product idea")
+    
     user_input = st.text_area(
         label="For best results, include your product name, key features, and problems you're solving. Aim to keep it within 1-2 sentences!",
         value=st.session_state.get("user_input", ""),
@@ -63,58 +65,101 @@ with right_col:
         st.success("✅ Product idea confirmed! You can now define your product insights.") # now that the key is set to true, the success message runs
         del st.session_state.show_confirm_success # the key that has been set to true is deleted. 
 
-    st.subheader("Step 2: Define product insight")
+
+    # product insights
+
+    st.markdown("""
+                """)
+    st.subheader("Step 2: Define product insights")
 
     # category overview
 
     st.markdown("##### Category Overview")
-    st.text_area("Write your product category or click the generate button", value=getattr(agent, 'category_output', ''), height=150)
+    st.text_area("Write your product category or click the generate button", value=getattr(agent, 'category_output', ''), height=200)
 
-    col1, col2 = st.columns([1,1])
-    with col1:
-        if st.button("Generate", key="category_overview", use_container_width=True):
-            agent.category_output = agent.generate_category_overview(user_input)
-            st.session_state.insight_steps_done['category'] = True
-            st.success("✅ Category overview generated!")
-    with col2:    
-        if st.button("Clear", key="clear_category_overview", use_container_width=True):
-            del st.session_state.product_idea_confirmed
-            st.session_state.user_input = ""
+    generate_clear_buttons(
+        generate_callback=lambda: (
+            setattr(agent, "category_output", agent.generate_category_overview(user_input)),
+            st.session_state.insight_steps_done.update({"category": True}),
             st.rerun()
+        ),
+        clear_callback=lambda: (
+            setattr(agent, "category_output", ""),
+            st.session_state.insight_steps_done.update({"category": False}),
+            st.rerun()
+        ),
+        generate_key="category_generate_btn",
+        clear_key="category_clear_btn"
+    )
 
-    col1, col2 = st.columns([3,1])
-    with col1:
-        st.markdown("##### Competitor Landscape")
-    with col2:
-        if st.button("Generate", key="competitor_landscape"):
-            agent.competitor_output = agent.generate_competitor_landscape(user_input)
-            st.session_state.insight_steps_done['competitor'] = True
-            st.success("✅ Competitor landscape generated!")
-    st.text_area("Write competitor or click generate", value=getattr(agent, 'competitor_output', ''), height=150)
+    # competitor landscape
 
-    col1, col2 = st.columns([3,1])
-    with col1:
-        st.markdown("##### Target Persona")
-    with col2:
-        if st.button("Generate", key="target_persona"):
-            agent.persona_output = agent.generate_target_persona(user_input)
-            st.session_state.insight_steps_done['persona'] = True
-            st.success("✅ Target persona generated!")
-    st.text_area("Write target or click generate", value=getattr(agent, 'persona_output', ''), height=150)
+    st.markdown("##### Competitor Landscape")
+    st.text_area("Write your competitor landscape or click the generate button", value=getattr(agent, 'competitor_landscape', ''), height=200)
 
-    col1, col2 = st.columns([3,1])
-    with col1:
-        st.markdown("##### Unique Differentiators")
-    with col2:
-        if st.button("Generate", key="unique_differentiators"):
-            agent.differentiators_output = agent.generate_unique_differentiators(user_input)
-            st.session_state.insight_steps_done['differentiators'] = True
-            st.success("✅ Differentiators generated!")
-    st.text_area("Write differentiators or click generate", value=getattr(agent, 'differentiators_output', ''), height=150)
+    generate_clear_buttons(
+        generate_callback=lambda: (
+            setattr(agent, "competitor_landscape", agent.generate_competitor_landscape(user_input)),
+            st.session_state.insight_steps_done.update({"competitor": True}),
+            st.rerun()
+        ),
+        clear_callback=lambda: (
+            setattr(agent, "competitor_landscape", ""),
+            st.session_state.insight_steps_done.update({"competitor": False}),
+            st.rerun()
+        ),
+        generate_key="competitor_generate_btn",
+        clear_key="competitor_clear_btn"
+    )
 
-    # Final positioning
+    # target persona   
+
+    st.markdown("##### Target Persona")
+    st.text_area("Write target or click generate", value=getattr(agent, 'target_persona', ''), height=200)
+
+    generate_clear_buttons(
+        generate_callback=lambda: (
+            setattr(agent, "target_persona", agent.generate_target_persona(user_input)),
+            st.session_state.insight_steps_done.update({"persona": True}),
+            st.rerun()
+        ),
+        clear_callback=lambda: (
+            setattr(agent, "target_persona", ""),
+            st.session_state.insight_steps_done.update({"persona": False}),
+            st.rerun()
+        ),
+        generate_key="persona_generate_btn",
+        clear_key="persona_clear_btn"
+    )
+
+    # unique differentiators 
+
+    st.markdown("##### Unique Differentiators")
+    st.text_area("Write differentiators or click generate", value=getattr(agent, 'unique_differentiators', ''), height=200)
+
+    generate_clear_buttons(
+        generate_callback=lambda: (
+            setattr(agent, "unique_differentiators", agent.generate_unique_differentiators(user_input)),
+            st.session_state.insight_steps_done.update({"differentiators": True}),
+            st.rerun()
+        ),
+        clear_callback=lambda: (
+            setattr(agent, "unique_differentiators", ""),
+            st.session_state.insight_steps_done.update({"differentiators": False}),
+            st.rerun()
+        ),
+        generate_key="differentiators_generate_btn",
+        clear_key="differentiators_clear_btn"
+    )
+
+    # Final positioning 
+
+    st.markdown("""
+                """)
     st.subheader("Step 3: Generate positioning statement")
-    if st.button("Generate Positioning Statement"):
+
+    
+    if st.button("Generate Positioning Statement", use_container_width=True):
         st.session_state.positioning_done = True
         combined = agent.get_combined_insights()
         statement = agent.generate_positioning_statement(combined)

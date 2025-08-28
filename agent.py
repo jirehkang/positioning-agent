@@ -27,7 +27,7 @@ class PositioningAgent:
         prompt=f"""
         Based on this idea: {user_input}
 
-        Describe the market the product competes in and highlight any differentiators. For example, unlike market X, our market is inherently anxious and cash-strapped.
+        Describe the market the product competes in and highlight any differentiators. For example, unlike market X, our market is inherently anxious and cash-strapped. Keep response within 650 characters (without spaces).
         """
 
         return self.generate(prompt)
@@ -35,7 +35,7 @@ class PositioningAgent:
     def generate_competitor_landscape(self, user_input):
 
         prompt=f"""
-        Based on this idea: {user_input}, list the top three competitors in the product's market. Also include each competitor's strengths and weaknesses in comparison to your product. 
+        Based on this idea: {user_input}, list the top three competitors in the product's market. Also include each competitor's strengths and weaknesses in comparison to your product. Keep response within 650 characters (without spaces).
         """
 
         return self.generate(prompt)
@@ -45,7 +45,9 @@ class PositioningAgent:
         prompt=f"""
         Based on this idea: {user_input}, generate a target persona for the product. 
         
-        A good persona includes a fictional name and photo, demographic details (age, location, job), psychographic information (goals, motivations, frustrations, interests), and behavioral patterns such as buying habits and preferred content or communication channels. It often features a narrative or quote from a real user to make the persona feel authentic and provides space for information about their work environment and challenges.
+        A good persona includes a fictional name, demographic details (age, location, job), psychographic information (goals, motivations, frustrations, interests), and behavioral patterns such as buying habits and preferred content or communication channels. It often features a narrative or quote from a real user to make the persona feel authentic and provides space for information about their work environment and challenges. 
+
+        Keep response within 650 characters (without spaces).
         """
         
         return self.generate(prompt)
@@ -58,6 +60,8 @@ class PositioningAgent:
         What about the product makes it stand out from the competition? If the competitor offers the exact same thing, it's not unique and doesn't belong here. 
         
         For each differentiator, include its challenge and value. As for the challenge, what problem(s) are customers facing because of a lack of this feature? As for the value, how does the unique attribute solve that challenge Draw on emotion, utopian visions, and real-life quotes where possible.
+
+        Keep response within 650 characters (without spaces).
         """
 
         return self.generate(prompt)
