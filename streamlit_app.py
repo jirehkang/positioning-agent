@@ -6,12 +6,17 @@ from prod_insight import render_prod_insight
 from positioning import render_positioning
 
 # Session states
-if 'product_desc_confirmed' not in st.session_state:
-    st.session_state.product_desc_confirmed = False
-if 'insight_steps_done' not in st.session_state:
-    st.session_state.insight_steps_done = {'category': False, 'competitor': False, 'persona': False, 'differentiators': False}
-if 'positioning_done' not in st.session_state:
-    st.session_state.positioning_done = False
+if 'product_desc_complete' not in st.session_state:
+    st.session_state.product_desc_complete = False
+if 'product_insight_complete' not in st.session_state:
+    st.session_state.product_insight_complete = {
+        'category': False, 
+        'competitor': False, 
+        'persona': False, 
+        'differentiators': False
+    }
+if 'positioning_complete' not in st.session_state:
+    st.session_state.positioning_complete = False
 if "editing" not in st.session_state:
     st.session_state.editing = True
 if "saved_text" not in st.session_state:
@@ -21,9 +26,13 @@ if "insight_generated" not in st.session_state:
 if "positioning_generated" not in st.session_state:
     st.session_state.positioning_generated = False
 
-render_progress_tracker()
-
 st.title("Positioning AI Agent")
+
+# Reset All button logic
+if st.button("🔄 Reset All", key="reset_all"):
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    st.rerun()
 st.markdown(
     """
     **Turn fuzzy ideas into a clear positioning statement!**
@@ -36,6 +45,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 render_prod_desc()
 render_prod_insight()
 render_positioning()
+render_progress_tracker()
 
 st.markdown("<br>", unsafe_allow_html=True) 
 st.divider()

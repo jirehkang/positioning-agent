@@ -6,9 +6,9 @@ def editable_text_box(
     session_edit_key: str,
     session_status_confirmed: str,
     area_label: str,
-    label_visibility: str,
     success_message: str,
     default_edit_mode=False,
+    label_visibility: str="visible",
     height: int=100,
     placeholder: str=""
 ):
@@ -32,7 +32,7 @@ def editable_text_box(
         with col1:
             if st.button("Save", use_container_width=True, key=f"save_{session_text_key}"):
                 if edited_text.strip() == "":
-                    st.error("Enter some text before saving.")
+                    st.error("Enter some text to save.")
                 else:
                     st.session_state[session_status_confirmed] = True
                     st.session_state[session_text_key] = edited_text
@@ -50,7 +50,7 @@ def editable_text_box(
         
     else:
         # Read-only mode
-        st.markdown(f"**{st.session_state[session_text_key]}**")
+        st.markdown(f"{st.session_state[session_text_key]}")
         if st.button("Edit", use_container_width=True, key=f"edit_{session_text_key}"):
             st.session_state[session_edit_key] = True
             st.rerun()

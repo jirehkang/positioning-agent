@@ -76,22 +76,11 @@ class PositioningAgent:
         """
 
         return self.generate(prompt)
-    
-    
-    def generate_all_insights(self, user_input):
-        self.category_output = self.generate_category_overview(user_input)
-        self.competitor_output = self.generate_competitor_landscape(user_input)
-        self.persona_output = self.generate_target_persona(user_input)
-        self.differentiators_output = self.generate_unique_differentiators(user_input)
 
-    def get_combined_insights(self):
-        combined = f"Category Overview:\n{self.category_output}\n\nCompetitor Landscape:\n{self.competitor_output}\n\nTarget Persona:\n{self.persona_output}\n\nUnique Differentiators:\n{self.differentiators_output}"
-        return combined
-
-    def generate_positioning_statement(self, combined):
+    def generate_positioning_statement(self, user_input):
 
         prompt=f"""
-            Based on this product information: {combined}
+            Based on this product information: {user_input}
 
             Create a positioning statement for the product. The positioning statement should generally follow the format of:
             "For [target audience] who [need or desire], [brand/product] is the [market definition] that [unique value proposition], because [reason to believe]."
