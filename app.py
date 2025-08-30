@@ -27,6 +27,12 @@ if "positioning_generated" not in st.session_state:
     st.session_state.positioning_generated = False
 
 st.title("Positioning AI Agent")
+
+# Reset All button logic
+if st.button("🔄 Reset All", key="reset_all"):
+    for key in list(st.session_state.keys()):
+        del st.session_state[key]
+    st.rerun()
 st.markdown(
     """
     **Turn fuzzy ideas into a clear positioning statement!**
@@ -38,8 +44,8 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 render_prod_desc()
 render_prod_insight()
-render_progress_tracker()
 render_positioning()
+render_progress_tracker()
 
 st.markdown("<br>", unsafe_allow_html=True) 
 st.divider()
