@@ -1,52 +1,50 @@
 import streamlit as st
-from agent import PositioningAgent
+from components.text_box import editable_text_box
+from components.progress_tracker import render_progress_tracker
+from prod_desc import render_prod_desc
+from prod_insight import render_prod_insight
+from positioning import render_positioning
 
-if 'agent' not in st.session_state:
-    st.session_state.agent = PositioningAgent()
+# Session states
+if 'product_desc_confirmed' not in st.session_state:
+    st.session_state.product_desc_confirmed = False
+if 'insight_steps_done' not in st.session_state:
+    st.session_state.insight_steps_done = {'category': False, 'competitor': False, 'persona': False, 'differentiators': False}
+if 'positioning_done' not in st.session_state:
+    st.session_state.positioning_done = False
+if "editing" not in st.session_state:
+    st.session_state.editing = True
+if "saved_text" not in st.session_state:
+    st.session_state.saved_text = ""
+if "insight_generated" not in st.session_state:
+    st.session_state.insight_generated = False
+if "positioning_generated" not in st.session_state:
+    st.session_state.positioning_generated = False
 
-agent = st.session_state.agent
-st.title("Positioning Statement Agent")
-st.header("Describe your product")
+render_progress_tracker()
 
-user_input = st.text_area(
-    "Describe your product or feature",
-    placeholder="Slack is where teams talk, share files, and connect their tools..."
+st.title("Positioning AI Agent")
+st.markdown(
+    """
+    **Turn fuzzy ideas into a clear positioning statement!**
+    
+    Describe your product, and this tool will help you turn it into market, competitor, and persona insights that build a strong positioning statement.
+    """
 )
+st.markdown("<br>", unsafe_allow_html=True) 
 
-col1, col2 = st.columns([3,1])
-with col1:
-    st.subheader("Category Overview")
-with col2:
-    if st.button("Generate Category Overview"):
-        agent.category_output = agent.generate_category_overview(user_input)
-st.text_area("Write your product category or click the generate button", value=getattr(agent, 'category_output', ''), height=150)
+render_prod_desc()
+render_prod_insight()
+render_positioning()
 
-col1, col2 = st.columns([3,1])
-with col1:
-    st.subheader("Competitor Landscape")
-with col2:
-    if st.button("Generate Competitor Landscape"):
-        agent.competitor_output = agent.generate_competitor_landscape(user_input)
-st.text_area("Write competitor or click generate", value=getattr(agent, 'competitor_output', ''), height=150)
+st.markdown("<br>", unsafe_allow_html=True) 
+st.divider()
+st.markdown(
+    """
 
-col1, col2 = st.columns([3,1])
-with col1:
-    st.subheader("Target Persona")
-with col2:
-    if st.button("Generate Target Persona"):
-        agent.persona_output = agent.generate_target_persona(user_input)
-st.text_area("Write target or click generate", value=getattr(agent, 'persona_output', ''), height=150)
-
-col1, col2 = st.columns([3,1])
-with col1:
-    st.subheader("Unique Differentiators")
-with col2:
-    if st.button("Generate Differentiators"):
-        agent.differentiators_output = agent.generate_unique_differentiators(user_input)
-st.text_area("Write differentiators or click generate", value=getattr(agent, 'differentiators_output', ''), height=150)
-
-# Final positioning
-if st.button("Generate Positioning Statement"):
-    combined = agent.get_combined_insights()
-    statement = agent.generate_positioning_statement(combined)
-    st.text_area("Positioning Statement", value=statement, height=100)
+    <div style="text-align: center; color: gray; font-size: 0.9em;">
+        © 2025 Jireh Kang · <a href="https://github.com/jirehkang/positioning-agent" target="_blank">GitHub Repo</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
