@@ -9,7 +9,7 @@ agent = st.session_state.agent
 def render_prod_insight():
     st.markdown("<br>", unsafe_allow_html=True) 
     st.subheader("Step 2: Generate product insight")
-    st.markdown("Based on your product description, generate insight on your product's market category, competitors, persona, and differentiators. After they're generated, you'll have the option to adjust them as needed for accuracy.")
+    st.markdown("Turn your product description into product insights on market category, competitors, persona, and differentiators. You'll be able to make edits afterwards to improve clarity or add details.")
 
     if "generate_insight_clicked" not in st.session_state:
         st.session_state.generate_insight_clicked = False
@@ -19,8 +19,8 @@ def render_prod_insight():
             st.session_state.generate_insight_clicked = True
 
     if st.session_state.generate_insight_clicked:
-        if not st.session_state.get("product_desc_confirmed", False):
-            st.error("Enter your product description to generate product insight.")
+        if not st.session_state.get("product_desc_complete", False):
+            st.error("Save your product description to generate product insight.")
         else:
             user_input = st.session_state.get("saved_text", "")
             if "category_text" not in st.session_state:
@@ -83,12 +83,24 @@ def render_prod_insight():
                     height=230,
                     success_message="Changes saved!"
                 )
-            
+
+                    
             st.session_state.insight_generated = True        
-            st.session_state.insight_steps_done = {
+            st.session_state.product_insight_complete = {
                 'category': True,
                 'competitor': True,
                 'persona': True,
                 'differentiators': True
             }
-            st.success("Product insight generation complete!")
+            st.session_state.insight_show_success = True
+    
+    if st.session_state.get("insight_show_success"):
+        if any([
+            st.session_state.get("category_editing", False),
+            st.session_state.get("competitor_editing", False),
+            st.session_state.get("persona_editing", False),
+            st.session_state.get("differentiators_editing", False)
+        ]):
+            del st.session_state.insight_show_success
+        else:
+            st.success("You're all set to move on to your positioning statement!")

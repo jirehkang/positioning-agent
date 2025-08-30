@@ -9,9 +9,9 @@ def render_prod_desc():
         placeholder="Slack is where teams talk, share files, and connect their tools...", 
         session_text_key="saved_text",
         session_edit_key="editing",
-        session_status_confirmed="product_desc_confirmed",
+        session_status_confirmed="product_desc_complete",
         area_label="product_desc",
         default_edit_mode=True,
         label_visibility="collapsed",
-        success_message="Changes saved. You can now generate product insight!"
+        success_message="Changes saved. Time to generate product insight!"
     )

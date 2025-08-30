@@ -6,12 +6,17 @@ from prod_insight import render_prod_insight
 from positioning import render_positioning
 
 # Session states
-if 'product_desc_confirmed' not in st.session_state:
-    st.session_state.product_desc_confirmed = False
-if 'insight_steps_done' not in st.session_state:
-    st.session_state.insight_steps_done = {'category': False, 'competitor': False, 'persona': False, 'differentiators': False}
-if 'positioning_done' not in st.session_state:
-    st.session_state.positioning_done = False
+if 'product_desc_complete' not in st.session_state:
+    st.session_state.product_desc_complete = False
+if 'product_insight_complete' not in st.session_state:
+    st.session_state.product_insight_complete = {
+        'category': False, 
+        'competitor': False, 
+        'persona': False, 
+        'differentiators': False
+    }
+if 'positioning_complete' not in st.session_state:
+    st.session_state.positioning_complete = False
 if "editing" not in st.session_state:
     st.session_state.editing = True
 if "saved_text" not in st.session_state:

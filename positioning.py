@@ -22,7 +22,7 @@ def render_positioning():
     if st.session_state.generate_positioning_clicked and not st.session_state.positioning_generated:
         combined = agent.get_combined_insights()
         user_input = st.session_state.get(combined, "")
-        if not st.session_state.get("product_desc_confirmed", False):
+        if not st.session_state.get("product_desc_complete", False):
             st.error("Enter your product description and generate product insights to see your positioning statement.")
         else:
             st.session_state.positioning_text = agent.generate_category_overview(user_input)
@@ -30,7 +30,7 @@ def render_positioning():
                 saved_content=st.session_state.positioning_text,
                 session_text_key="positioning_text",
                 session_edit_key="positioning_editing",
-                session_status_confirmed="positioning_done",
+                session_status_confirmed="positioning_complete",
                 area_label="Edit",
                 default_edit_mode=False,
                 success_message="Changes saved!"
