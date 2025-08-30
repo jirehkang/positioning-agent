@@ -16,4 +16,3 @@ def render_prod_desc():
         label_visibility="collapsed",
         success_message="Changes saved. Time to generate product insight!"
     )
-    print("DEBUG: Saved product_desc_text:", st.session_state.get("product_desc_text", ""))

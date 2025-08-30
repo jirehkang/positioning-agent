@@ -24,11 +24,6 @@ def render_positioning():
             st.error("Please complete your product description and generate product insights before generating your positioning statement.")
         else:
             with st.spinner("Generating your positioning statement..."):
-                print("DEBUG: prod_desc_text:\n", st.session_state.get("prod_desc_text", ""))
-                print("DEBUG: category_text:\n", st.session_state.get("category_text", ""))
-                print("DEBUG: differentiators_text:\n", st.session_state.get("differentiators_text", ""))
-                print("DEBUG: competitor_text:\n", st.session_state.get("competitor_text", ""))
-                print("DEBUG: persona_text:\n", st.session_state.get("persona_text", ""))
                 user_input = "\n\n".join([
                     st.session_state.get("prod_desc_text", ""),
                     st.session_state.get("category_text", ""),
@@ -36,7 +31,6 @@ def render_positioning():
                     st.session_state.get("competitor_text", ""),
                     st.session_state.get("persona_text", "")
                 ])
-                print("DEBUG: user_input for positioning statement:\n", user_input)
                 st.session_state.positioning_text = agent.generate_positioning_statement(user_input)
                 st.session_state.positioning_generated = True
                 st.session_state.positioning_complete = True

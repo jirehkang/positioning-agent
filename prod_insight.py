@@ -58,7 +58,6 @@ def render_prod_insight():
                 height=230,
                 success_message="Changes saved!"
             )
-            print("DEBUG: Saved category_text:", st.session_state.get("category_text", ""))
 
         if st.session_state.competitor_text:
             st.markdown("##### Competitor Landscape")
@@ -72,7 +71,6 @@ def render_prod_insight():
                 height=230,
                 success_message="Changes saved!"
             )
-            print("DEBUG: Saved competitor_text:", st.session_state.get("competitor_text", ""))
 
         if st.session_state.persona_text:
             st.markdown("##### Target Persona")
@@ -86,7 +84,6 @@ def render_prod_insight():
                 height=230,
                 success_message="Changes saved!"
             )
-            print("DEBUG: Saved persona_text:", st.session_state.get("persona_text", ""))
 
         if st.session_state.differentiators_text:
             st.markdown("##### Unique Differentiators")
@@ -100,4 +97,3 @@ def render_prod_insight():
                 height=230,
                 success_message="Changes saved!"
             )
-            print("DEBUG: Saved differentiators_text:", st.session_state.get("differentiators_text", ""))
