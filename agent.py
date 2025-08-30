@@ -47,7 +47,18 @@ class PositioningAgent:
         
         A good persona includes a fictional name, demographic details (age, location, job), psychographic information (goals, motivations, frustrations, interests), and behavioral patterns such as buying habits and preferred content or communication channels. It often features a narrative or quote from a real user to make the persona feel authentic and provides space for information about their work environment and challenges. 
 
-        Keep response within 650 characters (without spaces).
+        Keep response within 700 characters (without spaces) and structure the response in the following format: 
+            Name: 
+            Age: 
+            Location: 
+            Job: 
+            Goals: 
+            Motivations: 
+            Frustrations: 
+            Interests: 
+            Behavior: 
+            Quote:
+            Work environment:
         """
         
         return self.generate(prompt)
@@ -61,7 +72,7 @@ class PositioningAgent:
         
         For each differentiator, include its challenge and value. As for the challenge, what problem(s) are customers facing because of a lack of this feature? As for the value, how does the unique attribute solve that challenge Draw on emotion, utopian visions, and real-life quotes where possible.
 
-        Keep response within 650 characters (without spaces).
+        Keep response within 800 characters (without spaces).
         """
 
         return self.generate(prompt)

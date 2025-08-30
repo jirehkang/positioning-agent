@@ -8,7 +8,8 @@ def editable_text_box(
     area_label: str,
     success_message: str,
     default_edit_mode=False,
-    placeholder=""
+    height: int=120,
+    placeholder: str=""
 ):
 
     if session_edit_key not in st.session_state:
@@ -18,16 +19,19 @@ def editable_text_box(
 
     if st.session_state[session_edit_key]:
         # Editable mode
-        edited_text = st.text_area(area_label, value=st.session_state[session_text_key], key=f"{session_text_key}_input", placeholder=placeholder, height=130)
+        edited_text = st.text_area(area_label, value=st.session_state[session_text_key], key=f"{session_text_key}_input", placeholder=placeholder, height=height)
         
         col1, col2 = st.columns(2)
         with col1:
             if st.button("Save", use_container_width=True, key=f"save_{session_text_key}"):
-                st.session_state[session_status_confirmed] = True
-                st.session_state[session_text_key] = edited_text
-                st.session_state[session_edit_key] = False
-                st.session_state[f"{session_text_key}_show_success"] = True
-                st.rerun()
+                if edited_text.strip() == "":
+                    st.error("Enter some text before saving.")
+                else:
+                    st.session_state[session_status_confirmed] = True
+                    st.session_state[session_text_key] = edited_text
+                    st.session_state[session_edit_key] = False
+                    st.session_state[f"{session_text_key}_show_success"] = True
+                    st.rerun()
             
         with col2:
             if st.button("Cancel", use_container_width=True, key=f"cancel_{session_text_key}"):
