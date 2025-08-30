@@ -6,9 +6,10 @@ def editable_text_box(
     session_edit_key: str,
     session_status_confirmed: str,
     area_label: str,
+    label_visibility: str,
     success_message: str,
     default_edit_mode=False,
-    height: int=120,
+    height: int=100,
     placeholder: str=""
 ):
 
@@ -19,7 +20,13 @@ def editable_text_box(
 
     if st.session_state[session_edit_key]:
         # Editable mode
-        edited_text = st.text_area(area_label, value=st.session_state[session_text_key], key=f"{session_text_key}_input", placeholder=placeholder, height=height)
+        edited_text = st.text_area(
+            area_label, 
+            label_visibility=label_visibility,
+            value=st.session_state[session_text_key], 
+            key=f"{session_text_key}_input", 
+            placeholder=placeholder, 
+            height=height)
         
         col1, col2 = st.columns(2)
         with col1:
@@ -43,7 +50,7 @@ def editable_text_box(
         
     else:
         # Read-only mode
-        st.markdown(f"{st.session_state[session_text_key]}")
+        st.markdown(f"**{st.session_state[session_text_key]}**")
         if st.button("Edit", use_container_width=True, key=f"edit_{session_text_key}"):
             st.session_state[session_edit_key] = True
             st.rerun()

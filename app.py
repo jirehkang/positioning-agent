@@ -1,13 +1,9 @@
 import streamlit as st
-from agent import PositioningAgent
 from components.text_box import editable_text_box
 from components.progress_tracker import render_progress_tracker
 from prod_desc import render_prod_desc
 from prod_insight import render_prod_insight
 from positioning import render_positioning
-
-if 'agent' not in st.session_state:
-    st.session_state.agent = PositioningAgent()
 
 # Session states
 if 'product_desc_confirmed' not in st.session_state:
@@ -24,8 +20,6 @@ if "insight_generated" not in st.session_state:
     st.session_state.insight_generated = False
 if "positioning_generated" not in st.session_state:
     st.session_state.positioning_generated = False
-
-agent = st.session_state.agent
 
 render_progress_tracker()
 
