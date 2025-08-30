@@ -26,8 +26,6 @@ if "insight_generated" not in st.session_state:
 if "positioning_generated" not in st.session_state:
     st.session_state.positioning_generated = False
 
-render_progress_tracker()
-
 st.title("Positioning AI Agent")
 st.markdown(
     """
@@ -40,6 +38,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 render_prod_desc()
 render_prod_insight()
+render_progress_tracker()
 render_positioning()
 
 st.markdown("<br>", unsafe_allow_html=True) 
