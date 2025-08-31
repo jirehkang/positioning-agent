@@ -1,10 +1,10 @@
 import streamlit as st
 from components.text_box import editable_text_box
-from agent import PositioningAgent
+from generator import PositioningGenerator
 
-if 'agent' not in st.session_state:
-    st.session_state.agent = PositioningAgent()
-agent = st.session_state.agent
+if 'generator' not in st.session_state:
+    st.session_state.generator = PositioningGenerator()
+generator = st.session_state.generator
 
 def render_prod_insight():
     st.markdown("<br>", unsafe_allow_html=True) 
@@ -28,10 +28,10 @@ def render_prod_insight():
         else:
             user_input = st.session_state.get("product_desc_text", "")
             with st.spinner("Generating product insight..."):
-                st.session_state.category_text = agent.generate_category_overview(user_input)
-                st.session_state.competitor_text = agent.generate_competitor_landscape(user_input)
-                st.session_state.persona_text = agent.generate_target_persona(user_input)
-                st.session_state.differentiators_text = agent.generate_unique_differentiators(user_input)
+                st.session_state.category_text = generator.generate_category_overview(user_input)
+                st.session_state.competitor_text = generator.generate_competitor_landscape(user_input)
+                st.session_state.persona_text = generator.generate_target_persona(user_input)
+                st.session_state.differentiators_text = generator.generate_unique_differentiators(user_input)
 
                 st.session_state.insight_generated = True
                 st.session_state.generate_insight_clicked = False
