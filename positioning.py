@@ -1,10 +1,10 @@
 import streamlit as st
 from components.text_box import editable_text_box
-from agent import PositioningAgent
+from generator import PositioningGenerator
 
-if 'agent' not in st.session_state:
-    st.session_state.agent = PositioningAgent()
-agent = st.session_state.agent
+if 'generator' not in st.session_state:
+    st.session_state.generator = PositioningGenerator()
+generator = st.session_state.generator
 
 def render_positioning():
     st.markdown("<br>", unsafe_allow_html=True) 
@@ -31,7 +31,7 @@ def render_positioning():
                     st.session_state.get("competitor_text", ""),
                     st.session_state.get("persona_text", "")
                 ])
-                st.session_state.positioning_text = agent.generate_positioning_statement(user_input)
+                st.session_state.positioning_text = generator.generate_positioning_statement(user_input)
                 st.session_state.positioning_generated = True
                 st.session_state.positioning_complete = True
                 st.session_state.generate_positioning_clicked = False  # Reset flag
