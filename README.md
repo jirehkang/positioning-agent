@@ -1,6 +1,8 @@
-# Positioning Generator (WIP)
+# Positioning Generator (Beta)
 
 Positioning Generator is a lightweight Streamlit app that helps teams and solo builders generate AI-powered positioning statements by guiding them through six key inputs: product description, category overview, competitor landscape, target persona, and unique differentiators.
+
+👉 Check out the app: [https://positioning-generator.streamlit.app/](https://positioning-generator.streamlit.app/)
 
 ## Tech Stack
 
@@ -13,15 +15,19 @@ Positioning Generator is a lightweight Streamlit app that helps teams and solo b
 This project is a work in progress.
 
 ### ✅ Working Features
+
 - Guided product insight input
 - AI-generated insight based on product description
 - Editable fields for refinement
 - Positioning statement generation
 
 ### 🐞 Known Bugs
+
 - Inconsistent Generate button behavior after it's been clicked
 
 ### 🔧 In Progress
+
 - Improved validation and success messaging
 - Enhanced output quality
 - Refine overall look of the web app
+- Add a way for users to submit feedback and suggestions
