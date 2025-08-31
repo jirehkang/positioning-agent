@@ -54,7 +54,7 @@ st.markdown(
     """
 
     <div style="text-align: center; color: gray; font-size: 0.9em;">
-        © 2025 Jireh Kang · <a href="https://github.com/jirehkang/positioning-agent" target="_blank">GitHub Repo</a>
+        © 2025 Jireh Kang · <a href="https://github.com/jirehkang/positioning-generator" target="_blank">GitHub Repo</a>
     </div>
     """,
     unsafe_allow_html=True

@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI()
 
-class PositioningAgent:
+class PositioningGenerator:
     def __init__(self):
         self.client = OpenAI()
         self.model = "gpt-4.1-nano"
