@@ -26,7 +26,7 @@ if "insight_generated" not in st.session_state:
 if "positioning_generated" not in st.session_state:
     st.session_state.positioning_generated = False
 
-st.title("Positioning AI Agent")
+st.title("Positioning Generator")
 
 # Reset All button logic
 if st.button("🔄 Reset All", key="reset_all"):
@@ -38,7 +38,8 @@ st.markdown(
     **Turn fuzzy ideas into a clear positioning statement!**
     
     Describe your product, and this tool will help you turn it into market, competitor, and persona insights that build a strong positioning statement.
-    """
+    """, 
+    help="Approach inspired by Product Marketing Alliance's article [Your Guide to Positioning](https://www.productmarketingalliance.com/your-guide-to-positioning/)."
 )
 st.markdown("<br>", unsafe_allow_html=True) 
 
