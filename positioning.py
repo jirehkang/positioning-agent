@@ -37,9 +37,6 @@ def render_positioning():
                 st.session_state.generate_positioning_clicked = False  # Reset flag
 
             st.success("🎉 Congrats on creating your positioning statement!")
-            st.info(
-                "😉 Remember, a positioning statement isn't a one-and-done exercise. Keep iterating as you gather more insights about your product, market, and customers!"
-            )
 
     if st.session_state.get("positioning_generated", False):    
         st.markdown("##### Positioning Statement")

@@ -1,4 +1,6 @@
 .env
+.envrc
 venv/
 __pycache__
 components/__pycache__
+activate_venv.sh
